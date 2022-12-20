@@ -38,32 +38,50 @@ class _HomeState extends State<Home> {
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            ListView(
-              scrollDirection: Axis.horizontal,
-              children: [
-                Container(
-                  color: Colors.lightBlueAccent,
-                  child: Text(
-                    "Stationeries",
-                    style: TextStyle(color: Colors.white),
+            SizedBox(
+              height: 40,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                Padding(
+                  padding: EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 0.0),
+                  child: Container(
+                    padding: EdgeInsets.all(10.0),
+                    color: Colors.lightBlueAccent,
+                    child: Text(
+                      "Stationeries",
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 ),
-                Container(
-                  color: Colors.lightBlueAccent,
-                  child: Text("Snacks", style: TextStyle(color: Colors.white)),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 0.0),
+                  child: Container(
+                    padding: EdgeInsets.all(10.0),
+                    color: Colors.lightBlueAccent,
+                    child: Text("Snacks", style: TextStyle(color: Colors.white)),
+                  ),
                 ),
-                Container(
-                  color: Colors.lightBlueAccent,
-                  child:
-                      Text("Beverages", style: TextStyle(color: Colors.white)),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 0.0),
+                  child: Container(
+                    padding: EdgeInsets.all(10.0),
+                    color: Colors.lightBlueAccent,
+                    child:
+                        Text("Beverages", style: TextStyle(color: Colors.white)),
+                  ),
                 ),
-                Container(
-                  color: Colors.lightBlueAccent,
-                  child: Text("", style: TextStyle(color: Colors.white)),
-                )
-              ],
+                Padding(
+                  padding: EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 0.0),
+                  child: Container(
+                    padding: EdgeInsets.all(10.0),
+                    color: Colors.lightBlueAccent,
+                    child: Text("Services", style: TextStyle(color: Colors.white)),
+                  ),
+                ),
+                ]
+              ),
             )
           ],
         ),
