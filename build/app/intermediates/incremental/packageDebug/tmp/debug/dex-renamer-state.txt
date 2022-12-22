@@ -1,0 +1,4 @@
+#Thu Dec 22 18:24:39 MYT 2022
+base.0=/home/yen/Projects/koop/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
