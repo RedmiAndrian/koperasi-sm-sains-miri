@@ -1,6 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:koop/pages/login.dart';
 import 'package:koop/pages/newUserPage.dart';
 import 'package:koop/test_class/items.dart';
 
@@ -12,7 +12,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final user = FirebaseAuth.instance.currentUser;
+  final _user = FirebaseAuth.instance.currentUser;
+  final _userData = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +44,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  var _displayName;
+  final _userSetupRef = FirebaseFirestore.instance.collection('Users');
+  final _user = FirebaseAuth.instance;
+
   @override
   void initState() {
     List<Items> items = List<Items>.filled(
@@ -60,11 +65,18 @@ class _HomePageState extends State<HomePage> {
           padding: EdgeInsets.zero,
           children: [
             DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: const Text('Nanti Tambah'),
-            ),
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                ),
+                child: FutureBuilder(
+                  future: _fetch(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState != ConnectionState.done) {
+                      return Text('Sedang Memuat...');
+                    }
+                    return Text('Selamat Datang: $_displayName');
+                  },
+                )),
             ListTile(
               trailing: const Icon(Icons.logout),
               title: const Text("Log Out"),
@@ -135,5 +147,19 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  _fetch() async {
+    if (_user != null) {
+      await FirebaseFirestore.instance
+          .collection('Users')
+          .doc(_user.currentUser!.uid.toString())
+          .get()
+          .then((value) {
+        _displayName = value.data()!['displayName'];
+      }).catchError((e) {
+        print(e);
+      });
+    }
   }
 }
